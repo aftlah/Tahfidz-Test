@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        module.exports = {
+            //...
+            daisyui: {
+                themes: ["dark"],
+            },
+        }
+    </script>
+    <title>Document</title>
+</head>
+
+<body class="overflow-x-hidden max-h-screen">
+    <h1 class="text-4xl text-center my-14 mx-auto font-bold font-sans text-blue-600">TES TAHFIDZ</h1>
+
+    <div class="container mx-auto mt-9 ">
+        <div class="grid grid-cols-2 place-items-center  h-auto">
+            
+            <div class="lg:mr-24 md:mr-[5.5rem] sm:mr-[5.5rem] mr-3">
+                <div class="dropdown">
+                    <label tabindex="0" class="btn m-1  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800">Drop
+                        Down</label>
+                    <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-blue-900 rounded-box w-28 ">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:ml-24 md:ml-[5.5rem] sm:ml-[5.5rem] ml-3 w-50">
+                <div class="dropdown dropdown-bottom ">
+                    <label tabindex="0" class="btn m-1  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800">Drop
+                        Down</label>
+                    <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-blue-900 rounded-box w-28 ">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container mx-auto ">
+        <div class="grid grid-cols-2 place-items-center h-auto">
+            <div class="text-start">
+                <input type="number" placeholder="Type here" class="input input-bordered sm:w-full w-9/12 max-w-xs"
+                    onchange="console.log(this.value)" />
+            </div>
+
+            <div class="text-end">
+                <input type="number" placeholder="Type here" class="input input-bordered sm:w-full w-9/12 max-w-xs"
+                    onchange="" />
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 place-items-center mt-10">
+        <div class="">
+            <button class="btn btn-md lg:px-8  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800"
+                onclick="alert('tes')">BUTTON</button>
+        </div>
+    </div>
+
+
+    <script src="script"></script>
+</body>
+</html>
