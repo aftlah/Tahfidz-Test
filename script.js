@@ -1,6 +1,6 @@
 
 fetch('https://equran.id/api/surat').then(res=>res.json()).then(data=>{
-  const list=data.reduce((a,b,i)=>a+`<option class="font-base text-lg" value=${i+1}><a>${i+1}. ${b.nama_latin}</a></option>`, '');
+  const list=data.reduce((a,b,i)=>a+`<option class="font-base max-h-8" value=${i+1}><a>${i+1}. ${b.nama_latin}</a></option>`, '');
   document.querySelector('#select1').innerHTML=list;
   document.querySelector('#select2').innerHTML=list;
  })
