@@ -7,9 +7,9 @@ fetch('https://equran.id/api/surat').then(res=>res.json()).then(data=>{
 
 async function mulai(){
   //Dapetin nilai dari inputan, sementara defaultnya Al fatihah 1-7
-  const surat1=document.getElementById('surat1').value||1;
+  const surat1=document.getElementById('select1').value;
   const ayat1=document.getElementById('ayat1').value||1;
-  const surat2=document.getElementById('surat2').value||1;
+  const surat2=document.getElementById('select2').value||1;
   const ayat2=document.getElementById('ayat2').value||7;
   
   //Ngecek ayat pertama yang dimasukin ada di suratnya apa enggak
