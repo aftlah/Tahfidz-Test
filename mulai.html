@@ -6,4 +6,29 @@
      GET[v[0]]=v[1];
    })
    console.log(GET)
+   const {surat1,surat2,ayat1,ayat2}=GET;
+   
+   //Nentuin surat yang masuk quiznya
+   let suratTersedia;
+   fetch('https://equran.id/api/surat').then(res=>res.json()).then(surat=>{
+     suratTersedia=surat.slice(surat1-1,surat2)
+    console.log(suratTersedia)
+     main();
+    });
+   
+   async function main(){
+     const nomorSuratTerpilih=Math.round(Math.random()*(suratTersedia.length-1)+1);
+     const suratTerpilih=(await (await fetch('https://equran.id/api/surat/'+nomorSuratTerpilih)).json());
+     const jumlahAyatSuratTerpilih=suratTerpilih.jumlah_ayat;
+     
+      let ayatTerpilih=1;
+      //Percabangan biar ayatnya ga kurang ataupun ngelewatin batas ayat yang ditentuin
+      if(nomorSuratTerpilih==surat1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(jumlahAyatSuratTerpilih-ayat1-1));
+      else if(nomorSuratTerpilih==surat2)ayatTerpilih+=Math.round(Math.random()*ayat2);
+      else ayatTerpilih+=Math.round(Math.random()*jumlahAyatSuratTerpilih);
+      
+      console.log(nomorSuratTerpilih,ayatTerpilih)
+      const teksAyatTerpilih=suratTerpilih.ayat[ayatTerpilih-1].ar;
+      document.write(teksAyatTerpilih);
+   }
 </script>
