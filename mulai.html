@@ -1,45 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
 <head>
-  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.3/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Tes Tahfidz</title>
+  <script>
+    module.exports = {
+      //...
+      daisyui: {
+        themes: ["dark", "light"],
+      },
+    }
+  </script>
 </head>
+
 <body>
-<div id='soal' style='border:1px solid black'></div>
-<button onclick='tampilkan()'>Tampilkan jawaban</button>
-<button onclick='main()'>Soal baru</button>
-<script>
-  const boxSoal=document.getElementById('soal');
-  //Dapetin variabel di urlnya
-  const GET={};
-   location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g,'').split('&').forEach(v=>{
-     v=v.split('=');
-     GET[v[0]]=v[1];
-   })
-   console.log(GET)
-   const {surat1,surat2,ayat1,ayat2}=GET;
-   
-   //Nentuin surat yang masuk quiznya
-   let suratTersedia;
-   fetch('https://equran.id/api/surat').then(res=>res.json()).then(surat=>{
-     suratTersedia=surat.slice(surat1-1,surat2)
-     
-     main();
+  <div class="container">
+    <div class="w-screen h-screen m-auto ">
+      <div class="flex flex-col items-center justify-center h-full my-auto">
+        <h1 class="mb-5 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
+        <div class="flex justify-end w-11/12 mx-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
+          <div class="my-auto h-fit">
+            <div id='soal'
+              class="flex justify-center px-4 py-3 text-2xl leading-10 text-right md:leading-loose md:text-3xl"></div>
+          </div>
+        </div>
+        <div
+          class="flex flex-col items-end justify-center gap-3 mt-6 mb-8 text-center md:gap-5 md:mt-10 ms-[55%] md:items-center md:ms-0 md:flex-row">
+          <button onclick='main()'
+            class="p-2 font-medium bg-green-400 rounded-lg md:p-3.5 md:order-last text-slate-700">Soal baru</button>
+          <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
+            jawaban</button>
+        </div>
+        <div
+          class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
+          <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
+          <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    const boxSoal = document.getElementById('soal');
+    //Dapetin variabel di urlnya
+    const GET = {};
+    location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g, '').split('&').forEach(v => {
+      v = v.split('=');
+      GET[v[0]] = v[1];
+    })
+    console.log(GET)
+    const { surat1, surat2, ayat1, ayat2 } = GET;
+
+    //Nentuin surat yang masuk quiznya
+    let suratTersedia;
+    fetch('https://equran.id/api/surat').then(res => res.json()).then(surat => {
+      suratTersedia = surat.slice(surat1 - 1, surat2)
+
+      main();
     });
-   
-   async function main(){
-     const nomorSuratTerpilih=suratTersedia[Math.round(Math.random()*(suratTersedia.length-1))].nomor;
-     const suratTerpilih=(await (await fetch('https://equran.id/api/surat/'+nomorSuratTerpilih)).json());
-     const jumlahAyatSuratTerpilih=suratTerpilih.jumlah_ayat;
-     
-      let ayatTerpilih=1;
+
+    async function main() {
+      const nomorSuratTerpilih = suratTersedia[Math.round(Math.random() * (suratTersedia.length - 1))].nomor;
+      const suratTerpilih = (await (await fetch('https://equran.id/api/surat/' + nomorSuratTerpilih)).json());
+      const jumlahAyatSuratTerpilih = suratTerpilih.jumlah_ayat;
+
+      let ayatTerpilih = 1;
       //Percabangan biar ayatnya ga kurang ataupun ngelewatin batas ayat yang ditentuin
-      if(suratTersedia.length==1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(ayat2-ayat1))
-      else if(nomorSuratTerpilih==surat1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(jumlahAyatSuratTerpilih-ayat1));
-      else if(nomorSuratTerpilih==surat2)ayatTerpilih+=Math.round(Math.random()*ayat2);
-      else ayatTerpilih+=Math.round(Math.random()*jumlahAyatSuratTerpilih);
-      
-      const teksAyatTerpilih=suratTerpilih.ayat[ayatTerpilih-1].ar;
-      boxSoal.innerHTML=teksAyatTerpilih;
-      
+      if (suratTersedia.length == 1) ayatTerpilih += ayat1 - 1 + Math.round(Math.random() * (ayat2 - ayat1))
+      else if (nomorSuratTerpilih == surat1) ayatTerpilih += ayat1 - 1 + Math.round(Math.random() * (jumlahAyatSuratTerpilih - ayat1));
+      else if (nomorSuratTerpilih == surat2) ayatTerpilih += Math.round(Math.random() * ayat2);
+      else ayatTerpilih += Math.round(Math.random() * jumlahAyatSuratTerpilih);
+
+      const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].ar;
+      boxSoal.innerHTML = teksAyatTerpilih;
+
       return;
-   }
-</script>
+    }
+  </script>
 </body>
+
+</html>

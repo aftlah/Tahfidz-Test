@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -11,21 +11,21 @@
         module.exports = {
             //...
             daisyui: {
-                themes: ["dark"],
+                themes: ["dark","light"],
             },
         }
     </script>
     <title>Tes Tahfidz</title>
 </head>
 
-<body class="overflow-x-hidden max-h-screen overflow-hidden">
-    <h1 class="text-4xl text-center my-14 mx-auto font-bold font-sans text-blue-600">TES TAHFIDZ</h1>
+<body class="max-h-screen overflow-hidden overflow-x-hidden">
+    <h1 class="mx-auto font-sans text-4xl font-bold text-center text-blue-600 my-14">TES TAHFIDZ</h1>
 
-    <div class="container mx-auto mt-9 mb-2">
-        <div class="grid grid-cols-2 place-items-center h-auto">
+    <div class="container mx-auto mb-2 mt-9">
+        <div class="grid h-auto grid-cols-2 place-items-center">
 
             <div id="surat1">
-                <label tabindex="0" for="select1" class="m-1  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800"></label>
+                <label tabindex="0" for="select1" class="m-1 bg-blue-600 hover:bg-blue-700 focus:bg-blue-800"></label>
                 <select tabindex="0" name="select1" id="select1"
                     class="relative appearance-none outline-none cursor-pointer shadow menu w-[10.2rem] bg-blue-900 rounded-lg   sm:w-[13.5rem] hover:bg-blue-800 focus:bg-blue-7000">
 
@@ -33,7 +33,7 @@
             </div>
 
             <div id="surat2">
-                <label tabindex="0" for="select2" class="m-1  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800"></label>
+                <label tabindex="0" for="select2" class="m-1 bg-blue-600 hover:bg-blue-700 focus:bg-blue-800"></label>
                 <select tabindex="0" name="select2" id="select2"
                     class="relative appearance-none outline-none cursor-pointer shadow menu w-[10.2rem] bg-blue-900 rounded-lg sm:w-[13.5rem] hover:bg-blue-800 focus:bg-blue-7000">
 
@@ -44,30 +44,29 @@
     </div>
 
     <div class="container mx-auto ">
-        <div class="grid grid-cols-2 place-items-center h-auto">
+        <div class="grid h-auto grid-cols-2 place-items-center">
 
             <div class="text-center ">
                 <input type="number" id="ayat1" placeholder="Type here" min="0"
-                    class="input input-bordered sm:w-full w-9/12 max-w-xs" onchange="console.log(this.value)" />
+                    class="w-9/12 max-w-xs input input-bordered sm:w-full" onchange="console.log(this.value)" />
             </div>
 
             <div class="text-center">
                 <input type="number" id="ayat2" placeholder="Type here" min="0"
-                    class="input input-bordered sm:w-full w-9/12 max-w-xs" onchange="console.log(this.value)" />
+                    class="w-9/12 max-w-xs input input-bordered sm:w-full" onchange="console.log(this.value)" />
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 place-items-center mt-10">
+    <div class="grid grid-cols-1 mt-10 place-items-center">
         <div class="">
-            <button class="btn btn-md lg:px-8  bg-blue-600 hover:bg-blue-700 focus:bg-blue-800" id="start"
+            <button class="bg-blue-600 btn btn-md lg:px-8 hover:bg-blue-700 focus:bg-blue-800" id="start"
                 onclick="mulai()">Mulai</button>
         </div>
     </div>
 
 
     <script src="script.js"></script>
-    <script src="index.js"></script>
 </body>
 
 </html>
