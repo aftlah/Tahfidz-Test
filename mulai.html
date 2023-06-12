@@ -1,4 +1,12 @@
+<head>
+  
+</head>
+<body>
+<div id='soal' style='border:1px solid black'></div>
+<button onclick='tampilkan()'>Tampilkan jawaban</button>
+<button onclick='main()'>Soal baru</button>
 <script>
+  const boxSoal=document.getElementById('soal');
   //Dapetin variabel di urlnya
   const GET={};
    location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g,'').split('&').forEach(v=>{
@@ -12,23 +20,26 @@
    let suratTersedia;
    fetch('https://equran.id/api/surat').then(res=>res.json()).then(surat=>{
      suratTersedia=surat.slice(surat1-1,surat2)
-    console.log(suratTersedia)
+     
      main();
     });
    
    async function main(){
-     const nomorSuratTerpilih=Math.round(Math.random()*(suratTersedia.length-1)+1);
+     const nomorSuratTerpilih=suratTersedia[Math.round(Math.random()*(suratTersedia.length-1))].nomor;
      const suratTerpilih=(await (await fetch('https://equran.id/api/surat/'+nomorSuratTerpilih)).json());
      const jumlahAyatSuratTerpilih=suratTerpilih.jumlah_ayat;
      
       let ayatTerpilih=1;
       //Percabangan biar ayatnya ga kurang ataupun ngelewatin batas ayat yang ditentuin
-      if(nomorSuratTerpilih==surat1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(jumlahAyatSuratTerpilih-ayat1-1));
+      if(suratTersedia.length==1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(ayat2-ayat1))
+      else if(nomorSuratTerpilih==surat1)ayatTerpilih+=ayat1-1+Math.round(Math.random()*(jumlahAyatSuratTerpilih-ayat1));
       else if(nomorSuratTerpilih==surat2)ayatTerpilih+=Math.round(Math.random()*ayat2);
       else ayatTerpilih+=Math.round(Math.random()*jumlahAyatSuratTerpilih);
       
-      console.log(nomorSuratTerpilih,ayatTerpilih)
       const teksAyatTerpilih=suratTerpilih.ayat[ayatTerpilih-1].ar;
-      document.write(teksAyatTerpilih);
+      boxSoal.innerHTML=teksAyatTerpilih;
+      
+      return;
    }
 </script>
+</body>
