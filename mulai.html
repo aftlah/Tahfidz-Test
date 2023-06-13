@@ -39,7 +39,7 @@
       jawaban</button>
   </div>
   <div
-    class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5 ">
+    class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
     <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
     <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
   </div>
@@ -102,7 +102,7 @@
       const jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
       console.log((ayatTerpilih + 5) + ' ' + suratTerpilih.jumlah_ayat + ' ' + jumlahAyatSelanjutnya)
       let teks = `
-        <h3 class="fixed text-lg font-medium bg-slate-100 top-[6rem] right-[5.5rem] py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
+        <h3 class="fixed text-lg font-medium bg-slate-100 top-[5.7rem] right-10 py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
       <ol start="${ayatTerpilih}">
       `;
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
