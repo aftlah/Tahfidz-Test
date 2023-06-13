@@ -18,43 +18,46 @@
   </script>
 </head>
 
-<body>
-  <div class="container">
-    <div class="w-screen h-screen m-auto ">
-      <div class="flex flex-col items-center justify-center h-full my-auto">
-        <h1 class="mb-5 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
-        <div class="flex justify-end w-11/12 mx-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
-          <div class="my-auto h-fit">
-            <div id='soal'
-              class="flex justify-center px-4 py-3 text-2xl leading-10 text-right md:leading-loose md:text-3xl"></div>
-          </div>
-        </div>
-        <div
-          class="flex flex-col items-end justify-center gap-3 mt-6 mb-8 text-center md:gap-5 md:mt-10 ms-[55%] md:items-center md:ms-0 md:flex-row">
-          <button onclick='main()'
-            class="p-2 font-medium bg-green-400 rounded-lg md:p-3.5 md:order-last text-slate-700">Soal baru</button>
-          <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
-            jawaban</button>
-        </div>
-        <div
-          class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
-          <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
-          <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
-        </div>
+<body class="overflow-x-hidden"">
+  <div class="container ">
+  <div class="w-screen h-screen m-auto ">
+    <div class="flex flex-col items-center justify-center h-full my-auto ">
+  <h1 class="mb-10 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
+  <div
+    class="relative flex justify-end w-11/12 mx-auto overflow-y-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
+    <div class="my-auto h-fit">
+      <div id='soal'
+        class="justify-center block h-full px-4 py-3 text-2xl leading-relaxed text-right l md:leading-loose md:text-3xl">
       </div>
     </div>
+  </div>
+  <div
+    class="flex flex-col items-end justify-center gap-3 mt-6 mb-8 text-center md:gap-5 md:mt-10 ms-[55%] md:items-center md:ms-0 md:flex-row">
+    <button onclick='main()' class="p-2 font-medium bg-green-400 rounded-lg md:p-3.5 md:order-last text-slate-700">Soal
+      baru</button>
+    <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
+      jawaban</button>
+  </div>
+  <div
+    class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5 ">
+    <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
+    <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
+  </div>
+  </div>
+  </div>
   </div>
 
 
 
 
   <script>
-  alert(`
-  1. Cobalah baca sambungan dari ayat yang ada di soal
-  2. Setelah mencoba membacanya, klik tampilkan jawaban
-  3. Periksalah apakah jawabanmu benar atau salah
-  `);
-  
+    //   alert(`
+    //   // 1. Cobalah baca sambungan dari ayat yang ada di soal
+    //   // 2. Setelah mencoba membacanya, klik tampilkan jawaban
+    //   // 3. Periksalah apakah jawabanmu benar atau salah
+    // `);
+
+
     const boxSoal = document.getElementById('soal');
     //Dapetin variabel di urlnya
     const GET = {};
@@ -72,7 +75,7 @@
 
       main();
     });
-  
+
     let suratTerpilih, ayatTerpilih;
     async function main() {
       const nomorSuratTerpilih = suratTersedia[Math.round(Math.random() * (suratTersedia.length - 1))].nomor;
@@ -85,28 +88,27 @@
       else if (nomorSuratTerpilih == surat1) ayatTerpilih += ayat1 - 1 + Math.round(Math.random() * (jumlahAyatSuratTerpilih - ayat1));
       else if (nomorSuratTerpilih == surat2) ayatTerpilih += Math.round(Math.random() * ayat2);
       else ayatTerpilih += Math.round(Math.random() * jumlahAyatSuratTerpilih);
-      
+
       //Mencegah ayat terakhir kepilih
-      ayatTerpilih=ayatTerpilih==suratTerpilih.jumlah_ayat?ayatTerpilih-1:ayatTerpilih;
-      
+      ayatTerpilih = ayatTerpilih == suratTerpilih.jumlah_ayat ? ayatTerpilih - 1 : ayatTerpilih;
+
       const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].ar;
       boxSoal.innerHTML = teksAyatTerpilih;
 
-      return console.log(nomorSuratTerpilih+':'+ayatTerpilih);
+      return console.log(nomorSuratTerpilih + ':' + ayatTerpilih);
     }
-    
-    function tampilkan(){
-      const jumlahAyatSelanjutnya=ayatTerpilih+5>suratTerpilih.jumlah_ayat?suratTerpilih.jumlah_ayat-ayatTerpilih:5;
-      console.log((ayatTerpilih+5)+' ' +suratTerpilih.jumlah_ayat+' '+jumlahAyatSelanjutnya)
-      let teks=`
-      <h3>Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih+jumlahAyatSelanjutnya}</h3>
-      <br>
+
+    function tampilkan() {
+      const jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
+      console.log((ayatTerpilih + 5) + ' ' + suratTerpilih.jumlah_ayat + ' ' + jumlahAyatSelanjutnya)
+      let teks = `
+        <h3 class="fixed text-lg font-medium  bg-slate-100 top-[6rem] right-[7rem] py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
       <ol start="${ayatTerpilih}">
       `;
-      for(let i=0;i<=jumlahAyatSelanjutnya;i++){
-        teks+=`<li>${ayatTerpilih+i}. ${suratTerpilih.ayat[ayatTerpilih-1+i].ar}</li>`
+      for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
+        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5">${ayatTerpilih + i}. ${suratTerpilih.ayat[ayatTerpilih - 1 + i].ar}</li>`
       }
-      boxSoal.innerHTML=teks+'</ol>';
+      boxSoal.innerHTML = teks + '</ol>';
     }
   </script>
 </body>
