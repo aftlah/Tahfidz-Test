@@ -27,5 +27,5 @@ async function mulai(){
   if(surat1>surat2)return alert('Surat yang lebih awal harus ada di pertama');
   
   //Pindah halaman
-  location.href=`/mulai.html?surat1=${surat1}&ayat1=${ayat1}&surat2=${surat2}&ayat2=${ayat2}`;
+  location.href=location.href.replace('/index.html','')+`/mulai.html?surat1=${surat1}&ayat1=${ayat1}&surat2=${surat2}&ayat2=${ayat2}`;
 }

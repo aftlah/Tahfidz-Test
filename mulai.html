@@ -49,6 +49,12 @@
 
 
   <script>
+  alert(`
+  1. Cobalah baca sambungan dari ayat yang ada di soal
+  2. Setelah mencoba membacanya, klik tampilkan jawaban
+  3. Periksalah apakah jawabanmu benar atau salah
+  `);
+  
     const boxSoal = document.getElementById('soal');
     //Dapetin variabel di urlnya
     const GET = {};
@@ -66,23 +72,41 @@
 
       main();
     });
-
+  
+    let suratTerpilih, ayatTerpilih;
     async function main() {
       const nomorSuratTerpilih = suratTersedia[Math.round(Math.random() * (suratTersedia.length - 1))].nomor;
-      const suratTerpilih = (await (await fetch('https://equran.id/api/surat/' + nomorSuratTerpilih)).json());
+      suratTerpilih = (await (await fetch('https://equran.id/api/surat/' + nomorSuratTerpilih)).json());
       const jumlahAyatSuratTerpilih = suratTerpilih.jumlah_ayat;
 
-      let ayatTerpilih = 1;
+      ayatTerpilih = 1;
       //Percabangan biar ayatnya ga kurang ataupun ngelewatin batas ayat yang ditentuin
       if (suratTersedia.length == 1) ayatTerpilih += ayat1 - 1 + Math.round(Math.random() * (ayat2 - ayat1))
       else if (nomorSuratTerpilih == surat1) ayatTerpilih += ayat1 - 1 + Math.round(Math.random() * (jumlahAyatSuratTerpilih - ayat1));
       else if (nomorSuratTerpilih == surat2) ayatTerpilih += Math.round(Math.random() * ayat2);
       else ayatTerpilih += Math.round(Math.random() * jumlahAyatSuratTerpilih);
-
+      
+      //Mencegah ayat terakhir kepilih
+      ayatTerpilih=ayatTerpilih==suratTerpilih.jumlah_ayat?ayatTerpilih-1:ayatTerpilih;
+      
       const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].ar;
       boxSoal.innerHTML = teksAyatTerpilih;
 
-      return;
+      return console.log(nomorSuratTerpilih+':'+ayatTerpilih);
+    }
+    
+    function tampilkan(){
+      const jumlahAyatSelanjutnya=ayatTerpilih+5>suratTerpilih.jumlah_ayat?suratTerpilih.jumlah_ayat-ayatTerpilih:5;
+      console.log((ayatTerpilih+5)+' ' +suratTerpilih.jumlah_ayat+' '+jumlahAyatSelanjutnya)
+      let teks=`
+      <h3>Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih+jumlahAyatSelanjutnya}</h3>
+      <br>
+      <ol start="${ayatTerpilih}">
+      `;
+      for(let i=0;i<=jumlahAyatSelanjutnya;i++){
+        teks+=`<li>${ayatTerpilih+i}. ${suratTerpilih.ayat[ayatTerpilih-1+i].ar}</li>`
+      }
+      boxSoal.innerHTML=teks+'</ol>';
     }
   </script>
 </body>
