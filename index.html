@@ -25,17 +25,18 @@
         <div class="grid h-auto grid-cols-2 place-items-center">
 
             <div id="surat1">
-                <label tabindex="0" for="select1" class="m-1 bg-blue-400 hover:bg-blue-700 focus:bg-blue-400"></label>
+                <label tabindex="0" for="select1" class="ml-8 font-medium text-center align-middle ">Dari Surat</label>
                 <select tabindex="0" name="select1" id="select1"
-                    class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.5rem] bg-blue-400 rounded-lg  sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
+                    class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.4rem] bg-blue-400 rounded-lg  sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
+       
 
                 </select>
             </div>
 
             <div id="surat2">
-                <label tabindex="0" for="select2" class="m-1 bg-blue-400 hover:bg-blue-500 focus:bg-blue-600"></label>
-                <select tabindex="0" name="select2" id="select2"
-                    class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.5rem] bg-blue-400 rounded-lg sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
+                <label tabindex="0" for="select2" class="font-medium text-center align-middle ml-7 ">Sampai Surat</label>
+                <select tabindex="0" name="select2" id="select2" 
+                    class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.4rem] bg-blue-400 rounded-lg sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
 
                 </select>
             </div>
@@ -47,12 +48,12 @@
         <div class="grid h-auto grid-cols-2 place-items-center">
 
             <div class="text-center ">
-                <input type="number" id="ayat1" placeholder="Type here" min="0"
+                <input type="number" id="ayat1" placeholder="Dari Ayat..." min="1"
                     class="w-9/12 max-w-xs input input-bordered sm:w-full" onchange="console.log(this.value)" />
             </div>
 
             <div class="text-center">
-                <input type="number" id="ayat2" placeholder="Type here" min="0"
+                <input type="number" id="ayat2" placeholder="Sampe Ayat..." min="1" 
                     class="w-9/12 max-w-xs input input-bordered sm:w-full" onchange="console.log(this.value)" />
             </div>
         </div>
