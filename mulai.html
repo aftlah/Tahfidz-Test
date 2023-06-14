@@ -102,7 +102,7 @@
       const jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
       console.log((ayatTerpilih + 5) + ' ' + suratTerpilih.jumlah_ayat + ' ' + jumlahAyatSelanjutnya)
       let teks = `
-        <h3 class="fixed text-lg font-medium bg-slate-100 top-[5.7rem] right-0 py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
+        <h3 class="fixed text-lg font-medium bg-slate-100 top-[5.7rem] right-4 py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
       <ol start="${ayatTerpilih}">
       `;
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
