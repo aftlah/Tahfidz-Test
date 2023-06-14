@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         module.exports = {
             //...
@@ -28,14 +29,15 @@
                 <label tabindex="0" for="select1" class="ml-8 font-medium text-center align-middle ">Dari Surat</label>
                 <select tabindex="0" name="select1" id="select1"
                     class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.4rem] bg-blue-400 rounded-lg  sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
-       
+
 
                 </select>
             </div>
 
             <div id="surat2">
-                <label tabindex="0" for="select2" class="font-medium text-center align-middle ml-7 ">Sampai Surat</label>
-                <select tabindex="0" name="select2" id="select2" 
+                <label tabindex="0" for="select2" class="font-medium text-center align-middle ml-7 ">Sampai
+                    Surat</label>
+                <select tabindex="0" name="select2" id="select2"
                     class="relative appearance-none outline-none cursor-pointer shadow menu w-[9.4rem] bg-blue-400 rounded-lg sm:w-[13.5rem] hover:bg-blue-500 focus:bg-blue-400 border-none font-semibold">
 
                 </select>
@@ -53,7 +55,7 @@
             </div>
 
             <div class="text-center">
-                <input type="number" id="ayat2" placeholder="Sampe Ayat..." min="1" 
+                <input type="number" id="ayat2" placeholder="Sampe Ayat..." min="1"
                     class="w-9/12 max-w-xs input input-bordered sm:w-full" onchange="console.log(this.value)" />
             </div>
         </div>
@@ -68,6 +70,23 @@
 
 
     <script src="script.js"></script>
+    <script>
+        swal({
+            title: 'WELLCOME TO TES TAHFIDZ',
+            text: `
+             - Rules :
+            
+                1. Pilih Dari Surat Pertama Sampai Surat Kedua
+
+                2. Lalu Pilih Ayat Pertama dan Ayat Kedua 
+
+                3. Ayat Harus Sesuai Dengan Banyak Ayat Dari Surat Yg Dipilih
+                
+                4. Lalu Klik Mulai Untuk Memulai Tes Nya
+        `,
+        });
+    </script>
+
 </body>
 
 </html>

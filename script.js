@@ -2,7 +2,13 @@ fetch("https://equran.id/api/surat")
   .then((res) => res.json())
   .then((data) => {
     const list = data.reduce(
-      (a, b, i) =>a +`<option class="font-base max-h-8 font-medium" value=${i + 1}><a>${i + 1}. ${b.nama_latin}</a></option>`,"");
+      (a, b, i) =>
+        a +
+        `<option class="font-base max-h-8 font-medium" value=${i + 1}><a>${
+          i + 1
+        }. ${b.nama_latin}</a></option>`,
+      ""
+    );
     document.querySelector("#select1").innerHTML = list;
     document.querySelector("#select2").innerHTML = list;
   });
@@ -19,7 +25,9 @@ async function mulai() {
     await (await fetch("https://equran.id/api/surat/" + surat1)).json()
   ).jumlah_ayat;
   if (ayat1 <= 0 || ayat1 > ayatSurat1) {
-    return alert("Ayat tidak ditemukan");
+    return swal({
+      title: "Ayat Tidak Ditemukan!",
+    });
   }
 
   //Ngecek ayat kedua yang dimasukin ada di suratnya apa enggak
@@ -27,11 +35,15 @@ async function mulai() {
     await (await fetch("https://equran.id/api/surat/" + surat2)).json()
   ).jumlah_ayat;
   if (ayat2 <= 0 || ayat2 > ayatSurat2) {
-    return alert("Ayat tidak ditemukan");
+    return swal({
+      title: "Ayat Tidak Ditemukan!",
+    });
   }
 
   if (surat1 > surat2)
-    return alert("Surat yang lebih awal harus ada di pertama");
+    return swal({
+      title: "Surat Yang Lebih Awal Harus Ada Di Pertama",
+    });
 
   //Pindah halaman
   location.href =
