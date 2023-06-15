@@ -23,8 +23,10 @@
     <div class="container ">
     <div class="w-screen h-screen m-auto ">
       <div class="flex flex-col items-center justify-center h-full my-auto ">
-    <h1 class="mb-10 text-3xl font-bold  text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
-  <!-- <div class="m-auto bg-red-700">Judul Soal</div> -->
+    <h1 class="mb-6 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
+
+  <div id="judul-surat" class="w-11/12 h-8 mx-auto rounded-lg md:w-4/5 xl:w-8/12">
+  </div>
   <div
     class="relative flex justify-end w-11/12 mx-auto overflow-y-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
     <div class="my-auto h-fit">
@@ -68,6 +70,7 @@
 
 
     const boxSoal = document.getElementById('soal');
+    const judulSurat = document.getElementById('judul-surat')
     //Dapetin variabel di urlnya
     const GET = {};
     location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g, '').split('&').forEach(v => {
@@ -103,21 +106,25 @@
 
       const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].ar;
       boxSoal.innerHTML = teksAyatTerpilih;
+      judulSurat.innerHTML = ""
 
       return console.log(nomorSuratTerpilih + ':' + ayatTerpilih);
     }
 
+
+
+
     function tampilkan() {
       const jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
       console.log((ayatTerpilih + 5) + ' ' + suratTerpilih.jumlah_ayat + ' ' + jumlahAyatSelanjutnya)
-      let teks = `
-        <h3 class="fixed text-lg font-medium bg-slate-100 top-[5.7rem] right-5 py-1 px-3 rounded-lg -z-50 md:top-[6.7rem] md:right-1/4  lg:right[9rem] xl:right-[20rem]">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih}-${ayatTerpilih + jumlahAyatSelanjutnya}</h3>
-      <ol start="${ayatTerpilih}">
-      `;
+      let judul = `<h3 class="w-full text-lg italic font-medium text-center">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih} - ${ayatTerpilih + jumlahAyatSelanjutnya}</h3>`
+      let teks = `<ol start="${ayatTerpilih}">`;
+        
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
         teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5">${ayatTerpilih + i}. ${suratTerpilih.ayat[ayatTerpilih - 1 + i].ar}</li>`
       }
       boxSoal.innerHTML = teks + '</ol>';
+      judulSurat.innerHTML = judul
     }
   </script>
 </body>
