@@ -19,7 +19,7 @@
   </script>
 </head>
 
-<body class="overflow-x-hidden"">
+<body class="overflow-x-hidden">
     <div class="container ">
     <div class="w-screen h-screen m-auto ">
       <div class="flex flex-col items-center justify-center h-full my-auto ">
@@ -121,7 +121,7 @@
       let teks = `<ol start="${ayatTerpilih}">`;
         
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
-        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5">${ayatTerpilih + i}. ${suratTerpilih.ayat[ayatTerpilih - 1 + i].ar}</li>`
+        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i==0?'text-green':''}"><b>${(ayatTerpilih+i).toLocaleString('ar-EG')})</b> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].ar}</li>`
       }
       boxSoal.innerHTML = teks + '</ol>';
       judulSurat.innerHTML = judul
