@@ -42,7 +42,7 @@
       baru</button>
     <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
       jawaban</button>
-      <button onclick='toggleAudio()'>🔉</button>
+      <button id='tombolAudio' onclick='toggleAudio()'>Audio mati</button>
   </div>
   <div
     class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
@@ -73,6 +73,7 @@
     const judulSurat = document.getElementById('judul-surat');
     let soalTampil=false;
     let audioAktif=false;
+    const tombolAudio=document.getElementById('tombolAudio');
     
     //Dapetin variabel di urlnya
     const GET = {};
@@ -136,29 +137,31 @@
     
     function toggleAudio(){
       audioAktif=audioAktif?false:true;
-      jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
+      if(audioAktif){
+        tombolAudio.innerHTML='audio nyala';
+        jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
+      }
+      else tombolAudio.innerHTML='audio mati';
     }
     
     async function loadAudio(ayat){
       return Promise.all(ayat.map((v,i)=>{
         return new Promise((resolve, reject) =>{
-          console.log('Loading audio '+(i+1))
-          const suara=new Audio();
-          suara.onload=()=>resolve(suara);
-          suara.onerror=(err)=>reject(error);
-          suara.src=v.audio['05'];
+          const suara=new Audio(v.audio['05']);
+          suara.oncanplaythrough =()=>resolve(suara);
+          suara.onerror=(err)=>reject(err);
         })
       }))
     }
     
     async function jalankanAudio(ayat){
       if(!Array.isArray(ayat))ayat=[ayat];
-      const audio=await loadAudio(ayat).catch(e=>console.log(e));
-      console.log('finished', audio)
+      const audio=await loadAudio(ayat).catch(e=>console.log('error bro', e));
+    
       for(i=0;i<ayat.length;i++){
         await new Promise((resolve) => {
-            audio.onended = resolve;
-            audio.play();
+            audio[i].onended = resolve;
+            audio[i].play();
         }); 
       }
     }
