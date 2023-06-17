@@ -42,6 +42,7 @@
       baru</button>
     <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
       jawaban</button>
+      <button onclick='toggleAudio()'>🔉</button>
   </div>
   <div
     class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
@@ -68,31 +69,34 @@
     `,
     });
 
-
     const boxSoal = document.getElementById('soal');
-    const judulSurat = document.getElementById('judul-surat')
+    const judulSurat = document.getElementById('judul-surat');
+    let soalTampil=false;
+    let audioAktif=false;
+    
     //Dapetin variabel di urlnya
     const GET = {};
     location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g, '').split('&').forEach(v => {
       v = v.split('=');
       GET[v[0]] = v[1];
     })
-    console.log(GET)
     const { surat1, surat2, ayat1, ayat2 } = GET;
 
     //Nentuin surat yang masuk quiznya
     let suratTersedia;
-    fetch('https://equran.id/api/surat').then(res => res.json()).then(surat => {
-      suratTersedia = surat.slice(surat1 - 1, surat2)
+    fetch('https://equran.id/api/v2/surat').then(res => res.json()).then(surat => {
+      suratTersedia = surat.data.slice(surat1 - 1, surat2)
 
       main();
     });
 
     let suratTerpilih, ayatTerpilih;
     async function main() {
+      soalTampil=false;
+      
       const nomorSuratTerpilih = suratTersedia[Math.round(Math.random() * (suratTersedia.length - 1))].nomor;
-      suratTerpilih = (await (await fetch('https://equran.id/api/surat/' + nomorSuratTerpilih)).json());
-      const jumlahAyatSuratTerpilih = suratTerpilih.jumlah_ayat;
+      suratTerpilih = (await (await fetch('https://equran.id/api/v2/surat/' + nomorSuratTerpilih)).json()).data;
+      const jumlahAyatSuratTerpilih = suratTerpilih.jumlahAyat;
 
       ayatTerpilih = 1;
       //Percabangan biar ayatnya ga kurang ataupun ngelewatin batas ayat yang ditentuin
@@ -104,27 +108,59 @@
       //Mencegah ayat terakhir kepilih
       ayatTerpilih = ayatTerpilih == suratTerpilih.jumlah_ayat ? ayatTerpilih - 1 : ayatTerpilih;
 
-      const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].ar;
+      const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].teksArab;
       boxSoal.innerHTML = teksAyatTerpilih;
       judulSurat.innerHTML = ""
-
+      
+      if(audioAktif)jalankanAudio(suratTerpilih.ayat[ayatTerpilih-1])
       return console.log(nomorSuratTerpilih + ':' + ayatTerpilih);
     }
 
-
-
-
+  let jumlahAyatSelanjutnya;
     function tampilkan() {
-      const jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
-      console.log((ayatTerpilih + 5) + ' ' + suratTerpilih.jumlah_ayat + ' ' + jumlahAyatSelanjutnya)
-      let judul = `<h3 class="w-full text-lg italic font-medium text-center">Surat ${suratTerpilih.nama_latin} ayat ${ayatTerpilih} - ${ayatTerpilih + jumlahAyatSelanjutnya}</h3>`
+      soalTampil=true;
+      
+      jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlah_ayat ? suratTerpilih.jumlah_ayat - ayatTerpilih : 5;
+      
+      let judul = `<h3 class="w-full text-lg italic font-medium text-center">Surat ${suratTerpilih.namaLatin} ayat ${ayatTerpilih} - ${ayatTerpilih + jumlahAyatSelanjutnya}</h3>`
       let teks = `<ol start="${ayatTerpilih}">`;
         
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
-        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i==0?'text-green':''}"><b>${(ayatTerpilih+i).toLocaleString('ar-EG')})</b> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].ar}</li>`
+        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i==0?'text-green':''}"><b>${(ayatTerpilih+i).toLocaleString('ar-EG')})</b> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].teksArab}</li>`
       }
       boxSoal.innerHTML = teks + '</ol>';
-      judulSurat.innerHTML = judul
+      judulSurat.innerHTML = judul;
+      
+      if(audioAktif)jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya));
+    }
+    
+    function toggleAudio(){
+      audioAktif=audioAktif?false:true;
+      jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
+    }
+    
+    async function loadAudio(ayat){
+      return Promise.all(ayat.map((v,i)=>{
+        return new Promise((resolve, reject) =>{
+          console.log('Loading audio '+(i+1))
+          const suara=new Audio();
+          suara.onload=()=>resolve(suara);
+          suara.onerror=(err)=>reject(error);
+          suara.src=v.audio['05'];
+        })
+      }))
+    }
+    
+    async function jalankanAudio(ayat){
+      if(!Array.isArray(ayat))ayat=[ayat];
+      const audio=await loadAudio(ayat).catch(e=>console.log(e));
+      console.log('finished', audio)
+      for(i=0;i<ayat.length;i++){
+        await new Promise((resolve) => {
+            audio.onended = resolve;
+            audio.play();
+        }); 
+      }
     }
   </script>
 </body>
