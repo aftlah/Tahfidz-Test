@@ -20,69 +20,87 @@
 </head>
 
 <body class="overflow-x-hidden">
-    <div class="container ">
+  <div class="container ">
     <div class="w-screen h-screen m-auto ">
       <div class="flex flex-col items-center justify-center h-full my-auto ">
-    <h1 class="mb-6 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
+        <h1 class="mb-6 text-3xl font-bold text-slate-600">🙏 TES TAHFIDZ 🙏</h1>
 
-  <div id="judul-surat" class="w-11/12 h-8 mx-auto rounded-lg md:w-4/5 xl:w-8/12">
-  </div>
-  <div
-    class="relative flex justify-end w-11/12 mx-auto overflow-y-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
-    <div class="my-auto h-fit">
-      <div id='soal'
-        class="justify-center block h-full px-4 py-3 text-2xl leading-relaxed text-right l md:leading-loose md:text-3xl">
+        <div id="judul-surat" class="w-11/12 h-8 mx-auto rounded-lg md:w-4/5 xl:w-8/12">
+        </div>
+        <div
+          class="relative flex justify-end w-11/12 mx-auto overflow-y-auto rounded-lg bg-slate-100 h-1/2 md:w-4/5 xl:w-8/12">
+          <div class="my-auto h-fit">
+            <div id='soal'
+              class="justify-center block h-full px-4 py-3 text-2xl leading-relaxed text-right l md:leading-loose md:text-3xl">
 
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-col items-end justify-center gap-3 mt-6 mb-8 text-center md:gap-5 md:mt-10 ms-[50%] md:items-center md:ms-0 md:flex-row">
+          <button id='tombolAudio' onclick='toggleAudio()' class="rounded-lg w-14 md:w-14 md:h-12"><svg class="w-10 m-auto text-green-600 md:w-12" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/>
+            </svg>
+          </button>
+          <button onclick='main()'
+            class="p-2 font-medium bg-green-400 rounded-lg md:p-3.5 md:order-last text-slate-700">Soal
+            baru</button>
+          <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
+            jawaban</button>
+        </div>
+        <div
+          class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
+          <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
+          <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    class="flex flex-col items-end justify-center gap-3 mt-6 mb-8 text-center md:gap-5 md:mt-10 ms-[50%] md:items-center md:ms-0 md:flex-row">
-    <button onclick='main()' class="p-2 font-medium bg-green-400 rounded-lg md:p-3.5 md:order-last text-slate-700">Soal
-      baru</button>
-    <button onclick='tampilkan()' class="p-2 font-medium bg-blue-400 rounded-lg md:p-3.5 text-slate-700">Tampilkan
-      jawaban</button>
-      <button id='tombolAudio' onclick='toggleAudio()'>Audio mati</button>
-  </div>
-  <div
-    class="flex flex-col p-2 mx-auto text-center justify-centerp-3 items-cen rounded-xl bg-slate-50 md:w-8/12 lg:w-1/2 xl:w-2/5">
-    <p class="text-xl font-bold">إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ</p>
-    <p class="pt-1 text-base">“Sesungguhnya amal perbuatan itu bergantung pada niatnya.”</p>
-  </div>
-  </div>
-  </div>
   </div>
 
 
 
 
   <script>
-    swal({
-      text: `
-      1. Cobalah baca sambungan dari ayat yang ada di soal
+    // swal({
+    //   text: `
+    //   1. Cobalah baca sambungan dari ayat yang ada di soal
 
-      2. Lalu jawab soal yang sudah tertulis di box soal
+    //   2. Lalu jawab soal yang sudah tertulis di box soal
 
-      3. Setelah mencoba membacanya, klik tampilkan jawaban
+    //   3. Setelah mencoba membacanya, klik tampilkan jawaban
       
-      4. Periksalah apakah jawabanmu benar atau salah
-    `,
-    });
+    //   4. Periksalah apakah jawabanmu benar atau salah
+    // `,
+    // });
 
     const boxSoal = document.getElementById('soal');
     const judulSurat = document.getElementById('judul-surat');
-    let soalTampil=false;
-    let audioAktif=false;
-    let stopAudio=false;
-    const tombolAudio=document.getElementById('tombolAudio');
-    
+    let soalTampil = false;
+    let audioAktif = false;
+    let stopAudio = false;
+    const tombolAudio = document.getElementById('tombolAudio');
+    const audioNyala = `<svg class="w-10 m-auto text-red-600 md:w-12" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>`
+    const audioMati = `<svg class="w-10 m-auto text-green-600 md:w-12" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                      </svg>`
+
+
     //Dapetin variabel di urlnya
     const GET = {};
     location.href.replace(/https?\:\/\/.*\/mulai\.html\?/g, '').split('&').forEach(v => {
       v = v.split('=');
       GET[v[0]] = v[1];
     })
-    const { surat1=1, surat2=114, ayat1=1, ayat2=6 } = GET;
+    const { surat1 = 1, surat2 = 114, ayat1 = 1, ayat2 = 6 } = GET;
 
     //Nentuin surat yang masuk quiznya
     let suratTersedia;
@@ -94,9 +112,9 @@
 
     let suratTerpilih, ayatTerpilih;
     async function main() {
-      stopAudio=true;
-      soalTampil=false;
-      
+      stopAudio = true;
+      soalTampil = false;
+
       const nomorSuratTerpilih = suratTersedia[Math.round(Math.random() * (suratTersedia.length - 1))].nomor;
       suratTerpilih = (await (await fetch('https://equran.id/api/v2/surat/' + nomorSuratTerpilih)).json()).data;
       const jumlahAyatSuratTerpilih = suratTerpilih.jumlahAyat;
@@ -114,69 +132,69 @@
       const teksAyatTerpilih = suratTerpilih.ayat[ayatTerpilih - 1].teksArab;
       boxSoal.innerHTML = teksAyatTerpilih;
       judulSurat.innerHTML = ""
-      
-      if(audioAktif)jalankanAudio(suratTerpilih.ayat[ayatTerpilih-1])
+
+      if (audioAktif) jalankanAudio(suratTerpilih.ayat[ayatTerpilih - 1])
       return console.log(nomorSuratTerpilih + ':' + ayatTerpilih);
     }
 
-  let jumlahAyatSelanjutnya;
+    let jumlahAyatSelanjutnya;
     function tampilkan() {
-      stopAudio=true;
-      soalTampil=true;
-      
+      stopAudio = true;
+      soalTampil = true;
+
       jumlahAyatSelanjutnya = ayatTerpilih + 5 > suratTerpilih.jumlahAyat ? suratTerpilih.jumlahAyat - ayatTerpilih : 5;
-      
+
       let judul = `<h3 class="w-full text-lg italic font-medium text-center">Surat ${suratTerpilih.namaLatin} ayat ${ayatTerpilih} - ${ayatTerpilih + jumlahAyatSelanjutnya}</h3>`
       let teks = `<ol start="${ayatTerpilih}">`;
-       
-       //Nampilin jawaban ke boxSoal
+
+      //Nampilin jawaban ke boxSoal
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
-        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i==0?'text-green':''}"><b>${(ayatTerpilih+i).toLocaleString('ar-EG')})</b> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].teksArab}</li>`
+        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i == 0 ? 'text-green' : ''}"><b>${(ayatTerpilih + i).toLocaleString('ar-EG')})</b> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].teksArab}</li>`
       }
       boxSoal.innerHTML = teks + '</ol>';
       judulSurat.innerHTML = judul;
-      
-      if(audioAktif)jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih+jumlahAyatSelanjutnya));
+
+      if (audioAktif) jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih - 1, ayatTerpilih + jumlahAyatSelanjutnya));
     }
-    
-    function toggleAudio(){
-      audioAktif=audioAktif?false:true;
-      if(audioAktif){
-        tombolAudio.innerHTML='audio nyala';
-        jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
+
+    function toggleAudio() {
+      audioAktif = audioAktif ? false : true;
+      if (audioAktif) {
+        tombolAudio.innerHTML = audioNyala;
+        jalankanAudio(soalTampil ? suratTerpilih.ayat.slice(ayatTerpilih - 1, ayatTerpilih + jumlahAyatSelanjutnya) : suratTerpilih.ayat[ayatTerpilih - 1]);
       }
-      else{
-        tombolAudio.innerHTML='audio mati';
-        stopAudio=true;
+      else {
+        tombolAudio.innerHTML = audioMati;
+        stopAudio = true;
       }
     }
-    
-    async function loadAudio(ayat){
-      return Promise.all(ayat.map((v,i)=>{
-        return new Promise((resolve, reject) =>{
-          const suara=new Audio(v.audio['05']);
-          suara.oncanplaythrough =()=>resolve(suara);
-          suara.onerror=(err)=>reject(err);
+
+    async function loadAudio(ayat) {
+      return Promise.all(ayat.map((v, i) => {
+        return new Promise((resolve, reject) => {
+          const suara = new Audio(v.audio['05']);
+          suara.oncanplaythrough = () => resolve(suara);
+          suara.onerror = (err) => reject(err);
         })
       }))
     }
-    
-    async function jalankanAudio(ayat){
-      if(!Array.isArray(ayat))ayat=[ayat];
-      const audio=await loadAudio(ayat);
-      
-      stopAudio=false;
-      for(i=0;i<ayat.length;i++){
+
+    async function jalankanAudio(ayat) {
+      if (!Array.isArray(ayat)) ayat = [ayat];
+      const audio = await loadAudio(ayat);
+
+      stopAudio = false;
+      for (i = 0; i < ayat.length; i++) {
         audio[i].play()
         await new Promise(resolve => {
-            audio[i].onended = resolve;
-            (function apakahStop(){
-              if(stopAudio){
-                audio[i].pause();
-                resolve();
-              }
-              setTimeout(apakahStop,100)
-            })()
+          audio[i].onended = resolve;
+          (function apakahStop() {
+            if (stopAudio) {
+              audio[i].pause();
+              resolve();
+            }
+            setTimeout(apakahStop, 100)
+          })()
         });
       }
     }
