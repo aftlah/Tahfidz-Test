@@ -136,14 +136,14 @@
       boxSoal.innerHTML = teks + '</ol>';
       judulSurat.innerHTML = judul;
       
-      if(audioAktif)jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya));
+      if(audioAktif)jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih+jumlahAyatSelanjutnya));
     }
     
     function toggleAudio(){
       audioAktif=audioAktif?false:true;
       if(audioAktif){
         tombolAudio.innerHTML='audio nyala';
-        jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih-1+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
+        jalankanAudio(soalTampil? suratTerpilih.ayat.slice(ayatTerpilih-1,ayatTerpilih+jumlahAyatSelanjutnya):suratTerpilih.ayat[ayatTerpilih-1]);
       }
       else{
         tombolAudio.innerHTML='audio mati';
