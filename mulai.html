@@ -149,7 +149,7 @@
 
       //Nampilin jawaban ke boxSoal
       for (let i = 0; i <= jumlahAyatSelanjutnya; i++) {
-        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i == 0 ? 'text-green-700' : ''}"><div class="inline ml-3"><b>${(ayatTerpilih + i).toLocaleString('ar-EG')} )</b></div> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].teksArab}</li>`
+        teks += `<li class="text-[1.4rem] leading-loose px-2 mb-5 ${i == 0 ? 'text-blue-400' : ''}"><div class="inline ml-3"><b>${(ayatTerpilih + i).toLocaleString('ar-EG')} )</b></div> ${suratTerpilih.ayat[ayatTerpilih - 1 + i].teksArab}</li>`
       }
       boxSoal.innerHTML = teks + '</ol>';
       judulSurat.innerHTML = judul;

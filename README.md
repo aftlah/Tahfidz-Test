@@ -7,4 +7,8 @@ Fitur:
 Coba aplikasi ini disini! 
 https://aftlah.github.io/Tahfidz-Test
 
-Dibuat oleh @muraft dan @aftlah saat libur kenaikan kelas 2023
+Dibuat oleh @muraft dan @aftlah saat libur kenaikan kelas 2023.
+Dibuat menggunakan:
+- Tailwind css
+- Sweetalert
+- Equran.id API
