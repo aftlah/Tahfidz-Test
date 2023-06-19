@@ -154,14 +154,14 @@
       boxSoal.innerHTML = teks + '</ol>';
       judulSurat.innerHTML = judul;
 
-      if (audioAktif) jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih, ayatTerpilih + jumlahAyatSelanjutnya-1));
+      if (audioAktif) jalankanAudio(suratTerpilih.ayat.slice(ayatTerpilih, ayatTerpilih + jumlahAyatSelanjutnya));
     }
 
     function toggleAudio() {
       audioAktif = audioAktif ? false : true;
       if (audioAktif) {
         tombolAudio.innerHTML = audioNyala;
-        jalankanAudio(soalTampil ? suratTerpilih.ayat.slice(ayatTerpilih, ayatTerpilih + jumlahAyatSelanjutnya-1) : suratTerpilih.ayat[ayatTerpilih - 1]);
+        jalankanAudio(soalTampil ? suratTerpilih.ayat.slice(ayatTerpilih, ayatTerpilih + jumlahAyatSelanjutnya) : suratTerpilih.ayat[ayatTerpilih - 1]);
       }
       else {
         tombolAudio.innerHTML = audioMati;
@@ -193,7 +193,7 @@
               audio[i].pause();
               resolve();
             }
-            setTimeout(apakahStop, 30)
+            setTimeout(apakahStop, 16)
           })()
         });
       }
